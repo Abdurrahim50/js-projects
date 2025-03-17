@@ -30,26 +30,30 @@ switch(secim){
 
 
         okulPuani = Number(prompt("Okul puanınızı giriniz"));
-        turkceDogru = Number(prompt("Türkçe doğru sayısı"));
-        turkceYanlis = Number(prompt("Türkçe yanlış sayısı"));
-
-        matematikDogru = Number(prompt("Matematik doğru sayısı"));
-        matematikYanlis = Number(prompt("Matematik yanlış sayısı"));
-
-        sosyalDogru = Number(prompt("Sosyal doğru sayısı"));
-        sosyalYanlis = Number(prompt("Sosyal yanlış sayısı"));
-
-        fenDogru = Number(prompt("Fen doğru sayısı"));
-        fenYanlis = Number(prompt("Fen yanlış sayısı"));
-
-        //28  8/4 = 2 yanlış
-       let dogruSayisi =  turkceDogru+matematikDogru+sosyalDogru+fenDogru;
-       let yanlisSayisi  =turkceYanlis+matematikYanlis+sosyalYanlis+fenYanlis;
-       let kalanDogruSayisi = dogruSayisi - (yanlisSayisi/4);
-       puan = (kalanDogruSayisi*4) + 100 + okulPuani;
-       alert("TYT Puanınız : " + puan);
+        if(okulPuani<=60){
+            turkceDogru = Number(prompt("Türkçe doğru sayısı"));
+            turkceYanlis = Number(prompt("Türkçe yanlış sayısı"));
+    
+            matematikDogru = Number(prompt("Matematik doğru sayısı"));
+            matematikYanlis = Number(prompt("Matematik yanlış sayısı"));
+    
+            sosyalDogru = Number(prompt("Sosyal doğru sayısı"));
+            sosyalYanlis = Number(prompt("Sosyal yanlış sayısı"));
+    
+            fenDogru = Number(prompt("Fen doğru sayısı"));
+            fenYanlis = Number(prompt("Fen yanlış sayısı"));
+    
+            //28  8/4 = 2 yanlış
+           let dogruSayisi =  turkceDogru+matematikDogru+sosyalDogru+fenDogru;
+           let yanlisSayisi  =turkceYanlis+matematikYanlis+sosyalYanlis+fenYanlis;
+           let kalanDogruSayisi = dogruSayisi - (yanlisSayisi/4);
+           puan = (kalanDogruSayisi*4) + 100 + okulPuani;
+           alert("TYT Puanınız : " + puan);
+        }else{
+            alert("Lütfen okul puanınızı doğru şekilde giriniz");
+        }
         break;
-
+        
     case "2":
         alert("Uygulamadan çıkış yapıldı...");
         break;
