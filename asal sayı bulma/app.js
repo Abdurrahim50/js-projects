@@ -1,27 +1,21 @@
-//ASAL SAYI BULMA UYGULAMASI
+let sayi = Number(prompt("BİR SAYI GİRİNİZ"));
+let sonuc = true;
 
-/**
-
-  15    = 2 ,3 ,4 , 5 ,6 ,7
-
- */
-
-//   let a = Math.floor(7.9);
-//   console.log(a);
-
-
-//15
-let sayi = Number(prompt("Lütfen bir sayı giriniz :"));
-let sonuc =true;
-for(let i=2 ; i<= Math.floor(sayi/2) ; i++){
-    if(sayi%i==0){
-        //Asal degildir
-        sonuc=false;
-        break;
+// 0 ve 1 asal sayı değildir
+if (sayi === 0 || sayi === 1) {
+    sonuc = false;
+} else {
+    for (let i = 2; i < sayi; i++) {
+        if (sayi % i == 0) {
+            // Asal değildir
+            sonuc = false;
+            break;
+        }
     }
 }
-if(sonuc){
-    alert(sayi +" asaldır.");
-}else{
-    alert(sayi +" asal değildir!");
+
+if (sonuc) {
+    alert(sayi + " ASALDIR");
+} else {
+    alert(sayi + " ASAL DEĞİLDİR");
 }
