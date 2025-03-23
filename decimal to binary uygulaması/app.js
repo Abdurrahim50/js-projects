@@ -1,30 +1,14 @@
-// Decimal To Binary Conversion
+let sayi = Number(prompt("Bir sayı giriniz"));
 
-// 10 5     - 15
+let binary = decimal(sayi);
+console.log("İkilik sistemde sayı (ters çevrilmiş) : " + binary);
 
-convertDecimalToBinary(6);
-
-function convertDecimalToBinary(number){
-    let binary ="";
-    while(true){
-        binary+=(number%2).toString();
-        number=Math.floor(number/2);
-        if(number==1){
-            //Artık bölmek yok döngüden cıkacagız.
-            binary+=1;
-            break;
-        }
+function decimal(number) {
+    let binary = "";
+    while (number > 0) {
+        binary += (number % 2).toString();  // Sayıyı 2'ye bölüp kalanı ekliyoruz
+        number = Math.floor(number / 2);   // Sayıyı 2'ye bölüyoruz (tam sayı bölme)
     }
-    let result  = reverse(binary);
-    console.log("Sonuç : " + result);
-}
-
-
-function reverse(binary){
-    let reverseBinary = "";
-    for(let i = binary.length-1 ; i>=0 ; i--){
-        reverseBinary+=binary.charAt(i);
-    }
-
-    return reverseBinary;
+    let reversed = binary.split('').reverse().join('');  // Elde ettiğimiz binary'i tersine çeviriyoruz
+    return reversed;  // Sonuç döndürülüyor
 }
