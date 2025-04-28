@@ -30,37 +30,30 @@ function runEvents() {
 }
 
 // Filtreleme işlemi
+let previousFilterLength = 0; // arama kutusunun önceki uzunluğu
+
 function filter(e) {
-  const todoListesi = document.querySelectorAll(".list-group-item");
   const filterValue = e.target.value.toLowerCase().trim();
-  const inputElement = e.target;
+  const todoListesi = document.querySelectorAll(".list-group-item");
 
-  // Eğer input tamamen boşsa hiçbir şey yapma
-  if (filterValue === "") {
-    return;
-  }
-
-  // Eğer input içi seçiliyorsa (Ctrl+A gibi) hiçbir şey yapma
-  if (inputElement.selectionStart !== inputElement.selectionEnd) {
-    return;
-  }
-
-  // Todo listesi boşsa ve input doluysa uyarı ver
-  if (todoListesi.length === 0) {
-    if (!document.querySelector(".alert")) {
-      showAlert("warning", "Filtreleme için en az bir todo olmalı!");
+  // Yazma işlemi mi kontrol et
+  if (filterValue.length > previousFilterLength) {
+    if (todoListesi.length === 0 && filterValue !== "") {
+      showAlert("warning", "Filtreleme yapmak için en az bir todo olmalıdır!");
     }
-    return;
   }
 
-  // Filtreleme işlemi
+  // Mevcut todo'lar arasında filtreleme yap
   todoListesi.forEach(function (todo) {
     if (todo.textContent.toLowerCase().trim().includes(filterValue)) {
-      todo.style.display = "block";
+      todo.setAttribute("style", "display : block");
     } else {
-      todo.style.display = "none";
+      todo.setAttribute("style", "display : none !important");
     }
   });
+
+  // Son olarak previousFilterLength'i güncelle
+  previousFilterLength = filterValue.length;
 }
 
 // Tüm todoları sil
@@ -135,6 +128,13 @@ function addTodo(e) {
       addTodoToUI(inputText);
       addTodoToStorage(inputText);
       showAlert("success", "Todo eklendi.");
+
+      // Input'ları temizle
+      addInput.value = ""; // Todo input'unu temizle
+      filterInput.value = ""; // Arama input'unu temizle
+
+      // Tüm todoları tekrar göster
+      showAllTodos();
     }
   }
 }
@@ -199,7 +199,6 @@ function showAlert(type, message, targetBody) {
     div.remove();
   }, 2500);
 }
-
 
 // Style ayarları
 function setButtonStyles() {
