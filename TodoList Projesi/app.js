@@ -30,28 +30,36 @@ function runEvents() {
 }
 
 // Filtreleme işlemi
-let previousFilterLength = 0;
 
-function filter(e) {
+let alertGosterildi = false;
+
+function filter(e){
   const filterValue = e.target.value.toLowerCase().trim();
   const todoListesi = document.querySelectorAll(".list-group-item");
 
-  if (filterValue.length > previousFilterLength) {
-    if (todoListesi.length === 0 && filterValue !== "") {
-      showAlert("warning", "Filtreleme yapmak için en az bir todo olmalıdır!");
-    }
+  if(filterValue.length === 0){
+    alertGosterildi = false;
+    todoListesi.forEach(function(todo){
+      todo.setAttribute("style", "display: block");
+    });
+    return;
   }
 
-  todoListesi.forEach(function (todo) {
-    if (todo.textContent.toLowerCase().trim().includes(filterValue)) {
-      todo.style.display = "block";
-    } else {
-      todo.style.display = "none";
-    }
-  });
-
-  previousFilterLength = filterValue.length;
+  if(todoListesi.length > 0){
+    todoListesi.forEach(function(todo){
+      if(todo.textContent.toLowerCase().trim().includes(filterValue)){
+        todo.setAttribute("style", "display: block");
+      }else{
+        todo.setAttribute("style", "display: none !important");
+      }
+    });
+  }
+  else if (!alertGosterildi){
+    showAlert("warning", "Filtreleme yapmak için en az bir todo olmalıdır!");
+    alertGosterildi = true;
+  }
 }
+
 
 // Tüm todoları sil
 function allTodosEverywhere() {
@@ -131,7 +139,9 @@ function addTodo(e) {
 function addTodoToUI(newTodo) {
   const li = document.createElement("li");
   li.className = "list-group-item d-flex justify-content-between";
-  li.textContent = newTodo;
+
+  const span = document.createElement("span");
+  span.textContent = newTodo;
 
   const a = document.createElement("a");
   a.href = "#";
@@ -141,6 +151,7 @@ function addTodoToUI(newTodo) {
   i.className = "fa fa-remove";
 
   a.appendChild(i);
+  li.appendChild(span);
   li.appendChild(a);
   todoList.appendChild(li);
 }
