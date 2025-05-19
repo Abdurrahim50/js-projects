@@ -26,7 +26,6 @@ function clear() {
 
   if (!hasImages && !value) {
     alert("Temizlenecek görsel bulunmamaktadır.");
-    searchInput.value = ""; // input'u yine de temizle
     return;
   }
 
