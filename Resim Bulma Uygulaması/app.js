@@ -17,17 +17,22 @@ function clear() {
   const value = searchInput.value.trim();
   const hasImages = imageListWrapper.children.length > 0;
 
-  if (!value && !hasImages) {
-    alert("Temizlenecek görsel bulunmamaktadır.");
+  if (hasImages) {
+    // Görseller varsa temizle ve input'u da temizle
+    Array.from(imageListWrapper.children).forEach((child) => child.remove());
+    searchInput.value = "";
     return;
   }
 
-  // Resimler varsa temizle
-  Array.from(imageListWrapper.children).forEach((child) => child.remove());
+  if (!hasImages && !value) {
+    alert("Temizlenecek görsel bulunmamaktadır.");
+    searchInput.value = ""; // input'u yine de temizle
+    return;
+  }
 
-  // Input varsa önce arama yaptır
-  if (value) {
-    alert("Lütfen önce arama yapınız")
+  if (!hasImages && value) {
+    alert("Lütfen önce arama yapınız.");
+    return;
   }
 }
 
@@ -54,7 +59,6 @@ function search(e) {
       data.results.forEach((image) => {
         addImageToUI(image.urls.small);
       });
-      searchInput.value = "";
     })
     .catch((err) => console.log(err));
 }
