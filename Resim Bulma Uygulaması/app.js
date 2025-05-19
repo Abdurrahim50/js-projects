@@ -17,8 +17,8 @@ function clear() {
   const value = searchInput.value.trim();
   const hasImages = imageListWrapper.children.length > 0;
 
-  if (!hasImages) {
-    alert("Temizlenecek resim bulunmamaktadır.");
+  if (!value && !hasImages) {
+    alert("Temizlenecek görsel bulunmamaktadır.");
     return;
   }
 
