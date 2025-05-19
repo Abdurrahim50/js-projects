@@ -18,7 +18,7 @@ function clear() {
   const hasImages = imageListWrapper.children.length > 0;
 
   if (!hasImages) {
-    alert("Temizlenecek görsel bulunmamaktadır.");
+    alert("Temizlenecek resim bulunmamaktadır.");
     return;
   }
 
