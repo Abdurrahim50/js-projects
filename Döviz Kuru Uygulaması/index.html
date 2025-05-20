@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     
 
     <div id="container">
         <div id="main">
+
             <div class="header-wrapper">
                 <h4>DOVİZ KURU ÇEVİRME</h4>
             </div>
@@ -94,9 +96,11 @@
                 </select>
 
                 <input type="number" id="result" readonly placeholder="Sonuç"/>
-
-                <span>Copyright - Abdurrahim ER</span>
             </div>
+
+            <canvas id="last7DaysChart" width="600" height="250"></canvas>
+            
+            <span>Copyright - Abdurrahim ER</span>
         </div>
     </div>
     <script src="currency.js"> </script>
